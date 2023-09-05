@@ -18,7 +18,9 @@ defmodule TodoApi.Todos do
 
   """
   def list_todos do
-    Repo.all(Todo)
+    q = from t in Todo, order_by: [desc: :inserted_at]
+
+    Repo.all(q)
   end
 
   @doc """
