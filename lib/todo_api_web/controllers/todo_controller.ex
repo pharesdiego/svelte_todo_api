@@ -4,7 +4,7 @@ defmodule TodoApiWeb.TodoController do
   alias TodoApi.Todos
   alias TodoApi.Todos.Todo
 
-  action_fallback TodoApiWeb.FallbackController
+  action_fallback(TodoApiWeb.FallbackController)
 
   def index(conn, _params) do
     todos = Todos.list_todos()
@@ -25,10 +25,11 @@ defmodule TodoApiWeb.TodoController do
     render(conn, :show, todo: todo)
   end
 
-  def update(conn, %{"id" => id, "todo" => todo_params}) do
+  def update(conn, %{"id" => id, "title" => title, "content" => content}) do
     todo = Todos.get_todo!(id)
 
-    with {:ok, %Todo{} = todo} <- Todos.update_todo(todo, todo_params) do
+    with {:ok, %Todo{} = todo} <-
+           Todos.update_todo(todo, %{"title" => title, "content" => content}) do
       render(conn, :show, todo: todo)
     end
   end
