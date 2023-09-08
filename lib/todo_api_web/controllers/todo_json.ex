@@ -20,7 +20,7 @@ defmodule TodoApiWeb.TodoJSON do
       id: todo.id,
       title: todo.title,
       content: todo.content,
-      inserted_at: todo.inserted_at,
+      inserted_at: todo.inserted_at
     }
   end
 end
